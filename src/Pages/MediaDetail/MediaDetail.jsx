@@ -47,7 +47,7 @@ const MediaDetail = () => {
         title: mediaType === "movie" ? data.title : data.name,
         genres: data.genres,
         overview: data.overview,
-        watch: data.videos.length > 0 && data.videos.results[0],
+        watch: data.videos.results.length > 0 && data.videos.results[0],
         cast: data.credits.cast,
       });
       setLoading(false);
@@ -56,6 +56,8 @@ const MediaDetail = () => {
       setError("Not Found!");
     }
   }
+
+  console.log(data);
 
   useEffect(() => {
     fetchDetailData();
@@ -108,7 +110,9 @@ const MediaDetail = () => {
               </a>
             </div>
           )}
-          <h2 className="media__casts-title">Movie Casts</h2>
+          {data.cast.length > 0 && (
+            <h2 className="media__casts-title">Movie Casts</h2>
+          )}
           <div className="media__casts">
             {data.cast.map((person) => {
               return (
