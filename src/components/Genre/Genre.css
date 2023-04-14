@@ -1,0 +1,32 @@
+.genres {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.genres__label {
+  display: inline-block;
+  font-size: 1.3rem;
+  color: #ffffff;
+  font-weight: 500;
+  background: #444444;
+  box-shadow: -3px -3px 12px #565656, 3px 3px 12px #323232;
+  border-radius: 2.4rem;
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  transition: background 200ms;
+}
+
+.genres__label.active {
+  background: #3f51b5;
+}
+
+@media screen and (min-width: 500px) {
+  .genres {
+    gap: 1.2rem;
+  }
+  .genres__label {
+    font-size: 1.6rem;
+    padding: 0.8rem 1.2rem;
+  }
+}

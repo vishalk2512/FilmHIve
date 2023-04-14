@@ -1,0 +1,29 @@
+.tab {
+  border-radius: 99999px;
+  max-width: max-content;
+  background: #444444;
+  box-shadow: -5px -5px 13px #565656, 5px 5px 13px #323232;
+}
+.tab__item {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 500;
+  padding: 0.8rem 2rem;
+  border-radius: 99999px;
+  transition: background 200ms;
+}
+
+@media screen and (max-width: 360px) {
+  .tab__item {
+    font-size: 1.2rem;
+  }
+}
+
+.tab__item:hover {
+  background: #3f51b5;
+  transition: background 500ms;
+}
+
+.tab__item.active {
+  background: #3f51b5;
+}

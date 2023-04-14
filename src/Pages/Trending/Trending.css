@@ -1,0 +1,35 @@
+.trending__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.trending__title {
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.trending__title::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 6rem;
+  height: 3px;
+  background: #3f51b5;
+}
+
+@media screen and (min-width: 800px) {
+  .trending__header {
+    gap: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .trending__title {
+    font-size: 3.6rem;
+  }
+}
