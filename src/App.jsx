@@ -18,7 +18,7 @@ function App() {
       <div className="container">
         <div className="main">
           <Routes>
-            <Route case="*" element={<NotFound />} />
+            <Route element={<NotFound />} />
             <Route path="/" element={<Trending />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/tvseries" element={<TVSeries />} />
