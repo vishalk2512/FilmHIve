@@ -55,7 +55,7 @@ const TVSeries = () => {
       </div>
 
       {loading && <Loader />}
-      {(error || datas.length === 0) && (
+      {(error || datas.length === 0) && !loading && (
         <p className="error--msg">TV Series Not Found!</p>
       )}
       {!loading && !error && (

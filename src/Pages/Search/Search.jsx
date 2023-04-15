@@ -82,7 +82,7 @@ const Search = () => {
       </div>
 
       {loading && <Loader />}
-      {(error || datas.length === 0) && (
+      {(error || datas.length === 0) && !loading && (
         <p className="error--msg">
           {mediaType === "movie" ? "Movies" : "TV Series"} Not Found!
         </p>

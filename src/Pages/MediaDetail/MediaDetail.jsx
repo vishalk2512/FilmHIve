@@ -57,8 +57,6 @@ const MediaDetail = () => {
     }
   }
 
-  console.log(data);
-
   useEffect(() => {
     fetchDetailData();
   }, []);
@@ -117,13 +115,17 @@ const MediaDetail = () => {
             {data.cast.map((person) => {
               return (
                 <div className="media__casts-item" key={person.id}>
-                  <img
+                  <LazyLoadImage
                     src={
                       person.profile_path
                         ? `${profilePathPrefix}${person.profile_path}`
                         : profilePlaceholder
                     }
                     alt={person.name}
+                    effect="blur"
+                    delayTime={100}
+                    delayMethod="throttle"
+                    useIntersectionObserver={true}
                   />
                   <p className="media__cast-name">{person.name}</p>
                 </div>

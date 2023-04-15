@@ -51,7 +51,7 @@ const Trending = () => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      setError("Movies Not Found!");
+      setError("Not Found!");
     }
   }
 

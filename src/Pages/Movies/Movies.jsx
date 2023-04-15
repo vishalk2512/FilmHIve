@@ -55,7 +55,7 @@ const Movies = () => {
       </div>
 
       {loading && <Loader />}
-      {(error || datas.length === 0) && (
+      {(error || datas.length === 0) && !loading && (
         <p className="error--msg">Movie Not Found!</p>
       )}
       {!loading && !error && (
