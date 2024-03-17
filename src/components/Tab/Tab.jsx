@@ -1,35 +1,33 @@
-import { useEffect, useState } from "react";
-import "./Tab.css";
+import { useEffect, useState } from 'react'
+import './Tab.css'
 
 const Tab = ({ item1, item2, handleTab }) => {
-  const [active, setActive] = useState(item1);
+  const [active, setActive] = useState(item1)
 
   useEffect(() => {
-    handleTab(active);
-  }, []);
+    handleTab(active)
+  }, [])
 
   return (
-    <div className="tab">
+    <div className='tab'>
       <button
-        className={`tab__item ${active === item1 ? "active" : ""}`}
+        className={`tab__item ${active === item1 ? 'active' : ''}`}
         onClick={() => {
-          setActive(item1);
-          handleTab(item1);
-        }}
-      >
+          setActive(item1)
+          handleTab(item1)
+        }}>
         {item1}
       </button>
       <button
-        className={`tab__item ${active === item2 ? "active" : ""}`}
+        className={`tab__item ${active === item2 ? 'active' : ''}`}
         onClick={() => {
-          setActive(item2);
-          handleTab(item2);
-        }}
-      >
+          setActive(item2)
+          handleTab(item2)
+        }}>
         {item2}
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Tab;
+export default Tab

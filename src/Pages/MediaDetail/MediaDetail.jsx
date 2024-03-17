@@ -1,11 +1,11 @@
-import axios from "axios";
-import "./MediaDetail.css";
-import { useEffect, useState } from "react";
-import { Loader } from "../../components";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
-import { FaYoutube } from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import axios from 'axios'
+import './MediaDetail.css'
+import { useEffect, useState } from 'react'
+import { Loader } from '../../components'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+import { FaYoutube } from 'react-icons/fa'
+import { useParams } from 'react-router-dom'
 
 import {
   backdropPlaceholder,
@@ -13,64 +13,63 @@ import {
   youtubePrefix,
   profilePlaceholder,
   profilePathPrefix,
-} from "../../utils/config";
-import { NotFound } from "../";
+} from '../../utils/config'
+import { NotFound } from '../'
 
-const apiKey = import.meta.env.VITE_API_KEY;
+const apiKey = import.meta.env.VITE_API_KEY
 
 const initialData = {
-  backdrop_path: "",
-  title: "",
+  backdrop_path: '',
+  title: '',
   genres: [],
-  overview: "",
+  overview: '',
   watch: {},
   cast: [],
-};
+}
 const MediaDetail = () => {
-  const { media, id } = useParams();
-  const [mediaType] = useState(media);
-  const [data, setData] = useState(initialData);
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState(null);
-  const [imageLoad, setimageLoad] = useState();
+  const { media, id } = useParams()
+  const [mediaType] = useState(media)
+  const [data, setData] = useState(initialData)
+  const [loading, setLoading] = useState(null)
+  const [error, setError] = useState(null)
+  const [imageLoad, setimageLoad] = useState()
 
   async function fetchDetailData() {
     try {
-      setError(null);
-      setLoading(true);
+      setError(null)
+      setLoading(true)
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/${mediaType}/${id}?api_key=${apiKey}&language=en-US&append_to_response=videos,credits`
-      );
+      )
 
       setData({
         backdrop_path: data.backdrop_path,
-        title: mediaType === "movie" ? data.title : data.name,
+        title: mediaType === 'movie' ? data.title : data.name,
         genres: data.genres,
         overview: data.overview,
         watch: data.videos.results.length > 0 && data.videos.results[0],
         cast: data.credits.cast,
-      });
-      setLoading(false);
+      })
+      setLoading(false)
     } catch (error) {
-      setLoading(false);
-      setError("Not Found!");
+      setLoading(false)
+      setError('Not Found!')
     }
   }
 
   useEffect(() => {
-    fetchDetailData();
-  }, []);
+    fetchDetailData()
+  }, [])
   return (
     <>
       {loading && <Loader />}
       {error && <NotFound />}
       {!loading && !error && (
-        <div className="media">
+        <div className='media'>
           <div
             className={`media__image-container ${
-              imageLoad && "media--image-load"
-            }`}
-          >
+              imageLoad && 'media--image-load'
+            }`}>
             <LazyLoadImage
               height={450}
               src={
@@ -79,42 +78,42 @@ const MediaDetail = () => {
                   : backdropPlaceholder
               }
               alt={data.title}
-              effect="blur"
+              effect='blur'
               delayTime={100}
-              delayMethod="throttle"
+              delayMethod='throttle'
               useIntersectionObserver={true}
               beforeLoad={() => setimageLoad(true)}
               afterLoad={() => setimageLoad(false)}
             />
           </div>
-          <div className="media__header">
-            <h1 className="media__title">{data.title}</h1>
-            <div className="media__genres">
+          <div className='media__header'>
+            <h1 className='media__title'>{data.title}</h1>
+            <div className='media__genres'>
               {data.genres.map((genre) => {
                 return (
-                  <span className="media__genres-item" key={genre.id}>
+                  <span className='media__genres-item' key={genre.id}>
                     #{genre.name}
                   </span>
-                );
+                )
               })}
             </div>
           </div>
-          <p className="media__text">{data.overview}</p>
+          <p className='media__text'>{data.overview}</p>
           {data.watch && (
-            <div className="media__link">
+            <div className='media__link'>
               <FaYoutube />
-              <a href={`${youtubePrefix}${data.watch.key}`} target="_blank">
+              <a href={`${youtubePrefix}${data.watch.key}`} target='_blank'>
                 Watch {data.watch.type}
               </a>
             </div>
           )}
           {data.cast.length > 0 && (
-            <h2 className="media__casts-title">Movie Casts</h2>
+            <h2 className='media__casts-title'>Movie Casts</h2>
           )}
-          <div className="media__casts">
+          <div className='media__casts'>
             {data.cast.map((person) => {
               return (
-                <div className="media__casts-item" key={person.id}>
+                <div className='media__casts-item' key={person.id}>
                   <LazyLoadImage
                     src={
                       person.profile_path
@@ -122,20 +121,20 @@ const MediaDetail = () => {
                         : profilePlaceholder
                     }
                     alt={person.name}
-                    effect="blur"
+                    effect='blur'
                     delayTime={100}
-                    delayMethod="throttle"
+                    delayMethod='throttle'
                     useIntersectionObserver={true}
                   />
-                  <p className="media__cast-name">{person.name}</p>
+                  <p className='media__cast-name'>{person.name}</p>
                 </div>
-              );
+              )
             })}
           </div>
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default MediaDetail;
+export default MediaDetail

@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
-import "./Genre.css";
+import './Genre.css'
 
-const apiKey = import.meta.env.VITE_API_KEY;
+const apiKey = import.meta.env.VITE_API_KEY
 
 const Genre = ({
   media_type,
@@ -12,65 +12,63 @@ const Genre = ({
   activeGenres,
   setActiveGenres,
 }) => {
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(null)
   async function fetchGenre() {
     try {
-      setLoading(true);
+      setLoading(true)
       const { data } = await axios.get(
         `https://api.themoviedb.org/3/genre/${media_type}/list?api_key=${apiKey}&language=en-US`
-      );
-      setGenres(data.genres);
-      setLoading(false);
+      )
+      setGenres(data.genres)
+      setLoading(false)
     } catch (error) {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   useEffect(() => {
-    fetchGenre();
-  }, []);
+    fetchGenre()
+  }, [])
 
   function addToActiveGenres(genre) {
-    setGenres(genres.filter((currGenre) => currGenre.id !== genre.id));
-    setActiveGenres([...activeGenres, genre]);
+    setGenres(genres.filter((currGenre) => currGenre.id !== genre.id))
+    setActiveGenres([...activeGenres, genre])
   }
 
   function removeFromActiveGenres(activeGenre) {
     setActiveGenres(
       activeGenres.filter((currGenre) => currGenre.id !== activeGenre.id)
-    );
-    setGenres([...genres, activeGenre]);
+    )
+    setGenres([...genres, activeGenre])
   }
 
   return (
     <>
       {loading ? (
-        <span className="genres--loading">Genre Loading...</span>
+        <span className='genres--loading'>Genre Loading...</span>
       ) : (
-        <div className="genres">
+        <div className='genres'>
           {activeGenres.map((activeGenre) => (
             <span
-              className="genres__label active"
+              className='genres__label active'
               key={activeGenre.id}
-              onClick={() => removeFromActiveGenres(activeGenre)}
-            >
+              onClick={() => removeFromActiveGenres(activeGenre)}>
               {activeGenre.name}
             </span>
           ))}
 
           {genres.map((genre) => (
             <span
-              className="genres__label"
+              className='genres__label'
               key={genre.id}
-              onClick={() => addToActiveGenres(genre)}
-            >
+              onClick={() => addToActiveGenres(genre)}>
               {genre.name}
             </span>
           ))}
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Genre;
+export default Genre
